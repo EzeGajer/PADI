@@ -758,3 +758,122 @@ footer {
 }
 
 
+/* General */
+#precios {
+  background: #f9fbfd;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Pestañas */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.tab-button {
+  padding: 12px 30px;
+  background: #cc3366;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  font-weight: bold;
+}
+
+.tab-button:hover {
+  transform: scale(1.05);
+  background: #b32a5c;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tab-button.active {
+  background: #993355;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid #cc3366;
+}
+
+/* Contenido de pestañas */
+.tab-content {
+  display: none;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.tab-content.active {
+  display: flex;
+}
+
+/* Tarjetas de precios */
+.price-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 3px solid #cc3366;
+  overflow: hidden;
+  position: relative;
+}
+
+.price-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Encabezado de las tarjetas */
+.price-card h3 {
+  color: #cc3366;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+/* Lista de precios */
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.price-card li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #ddd;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Descripción */
+.price-description {
+  font-weight: 500;
+  color: #555;
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}

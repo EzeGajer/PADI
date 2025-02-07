@@ -10,16 +10,16 @@ menuToggle.addEventListener('click', () => {
 // Efecto de tipeo con palabras reemplazables en el Hero
 const heroTitle = document.querySelector("#hero h1");
 const phrases = [
-    "¡SIMPLIFICA TU EXPERIENCIA UNIVERSITARIA CON PADI!!",
-    "¡CLASES GRUPALES A PRECIOS ACCESIBLES!!",
-    "¡MATERIAL EXCLUSIVO PARA TUS ESTUDIOS!!",
-    "¡PROFESORES DESTACADOS PARA AYUDARTE!!",
-    "¡FORMÁ PARTE DE LA COMUNIDAD PADI!!"
+    "¡Alcanzá tus metas con PADI!!",
+    "¡Aprobá tus materias por menos de una barrita de cereal al día!!"
 ];
 
 let phraseIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+let charIndex = phrases[0].length; // Para que la primera frase aparezca completa
+let isDeleting = true; // Empezar borrando para pasar a la siguiente frase
+
+// Mostrar la primera frase directamente
+heroTitle.textContent = phrases[0];
 
 function typeEffect() {
     const currentPhrase = phrases[phraseIndex];
@@ -43,7 +43,7 @@ function typeEffect() {
     setTimeout(typeEffect, typingSpeed);
 }
 
-setTimeout(typeEffect, 500); // Inicia el efecto de tipeo
+setTimeout(typeEffect, 2000); // Inicia el efecto de tipeo después de 2 segundos
 
 // Burbujas animadas con menor cantidad
 const bubblesContainer = document.createElement('div');
@@ -75,7 +75,6 @@ document.querySelectorAll('.faq-question').forEach(item => {
     });
 });
 
-
 // Botón de subir al inicio
 const scrollToTopBtn = document.querySelector('.scroll-to-top');
 
@@ -86,3 +85,16 @@ window.addEventListener('scroll', () => {
 scrollToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+
+function showTab(event, tabId) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-button');
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+    buttons.forEach(button => button.classList.remove('active'));
+
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+}
+
