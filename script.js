@@ -98,3 +98,130 @@ function showTab(event, tabId) {
     event.target.classList.add('active');
 }
 
+// Modal Control
+const modal = document.getElementById('modal-cronograma');
+const abrirBtn = document.getElementById('abrir-cronograma');
+const cerrarBtn = document.getElementById('cerrar-modal');
+const volverBtn = document.getElementById('volver-inicio');
+
+abrirBtn.addEventListener('click', () => modal.style.display = 'flex');
+cerrarBtn.addEventListener('click', () => modal.style.display = 'none');
+volverBtn.addEventListener('click', () => {
+    document.getElementById('cronograma-detalle').classList.add('hidden');
+    document.getElementById('profesores').classList.add('hidden');
+    document.getElementById('carrusel-materias').classList.remove('hidden');
+    volverBtn.classList.add('hidden');
+});
+
+// Materias y Profesores
+const materias = [
+    "Matemática I", "Matemática II", "Economía I", "Intro a la Estadística",
+    "ICG I", "Microeconomía", "Economía Matemática", "Macroeconomía",
+    "MEAN", "TD I", "TD II", "TD III", "TD V"
+];
+
+const profesoresPorMateria = {
+    "Matemática I": [{ nombre: "Belu Fernández", descripcion: "Profesora de Matemática I" }],
+    "TD II": [{ nombre: "Agustina Glusman", descripcion: "Profesora de TD II" }],
+    "Economía I": [{ nombre: "Juan Pérez", descripcion: "Profesor de Economía I" }]
+};
+
+const materiasCarrusel = document.getElementById('materias-carrusel');
+
+// Generar tarjetas de materias
+materias.forEach(materia => {
+    const card = document.createElement('div');
+    card.classList.add('materia-card');
+    card.innerHTML = `<h3>${materia}</h3>`;
+    card.addEventListener('click', () => mostrarProfesores(materia));
+    materiasCarrusel.appendChild(card);
+});
+
+// Carrusel
+document.getElementById('prev-materia').addEventListener('click', () => {
+    materiasCarrusel.scrollBy({ left: -300, behavior: 'smooth' });
+});
+document.getElementById('next-materia').addEventListener('click', () => {
+    materiasCarrusel.scrollBy({ left: 300, behavior: 'smooth' });
+});
+
+// Mostrar Profesores
+function mostrarProfesores(materia) {
+    document.getElementById('carrusel-materias').classList.add('hidden');
+    document.getElementById('profesores').classList.remove('hidden');
+    volverBtn.classList.remove('hidden');
+
+    const profesoresContainer = document.getElementById('profesores-lista');
+    profesoresContainer.innerHTML = '';
+
+    const profesores = profesoresPorMateria[materia] || [{ nombre: "Sin Profesores Disponibles", descripcion: "" }];
+
+    profesores.forEach(profesor => {
+        const card = document.createElement('div');
+        card.classList.add('profesor-card');
+        card.innerHTML = `<h3>${profesor.nombre}</h3><p>${profesor.descripcion}</p>`;
+        card.addEventListener('click', () => mostrarCronograma(profesor.nombre));
+        profesoresContainer.appendChild(card);
+    });
+}
+
+// Cronograma
+let fechaActual = new Date();
+
+document.getElementById('mes-anterior').addEventListener('click', () => {
+    fechaActual.setMonth(fechaActual.getMonth() - 1);
+    generarCalendario();
+});
+
+document.getElementById('mes-siguiente').addEventListener('click', () => {
+    fechaActual.setMonth(fechaActual.getMonth() + 1);
+    generarCalendario();
+});
+
+function mostrarCronograma(profesor) {
+    document.getElementById('profesores').classList.add('hidden');
+    document.getElementById('cronograma-detalle').classList.remove('hidden');
+    document.getElementById('profesor-seleccionado').textContent = profesor;
+    generarCalendario();
+}
+
+function generarCalendario() {
+    const calendario = document.getElementById('calendario-body');
+    calendario.innerHTML = '';
+
+    const mes = fechaActual.getMonth();
+    const anio = fechaActual.getFullYear();
+    const primerDia = new Date(anio, mes, 1).getDay();
+    const diasEnMes = new Date(anio, mes + 1, 0).getDate();
+
+    document.getElementById('mes-actual').textContent = `${fechaActual.toLocaleString('default', { month: 'long' })} ${anio}`;
+
+    let dia = 1;
+    for (let i = 0; i < 6; i++) {
+        const fila = document.createElement('tr');
+
+        for (let j = 1; j <= 7; j++) {
+            const celda = document.createElement('td');
+
+            if ((i === 0 && j < primerDia) || dia > diasEnMes) {
+                celda.innerHTML = '';
+            } else {
+                celda.innerHTML = `${dia}`;
+
+                if (j === 2 || j === 4) {
+                    const clase = document.createElement('div');
+                    clase.classList.add('clase');
+                    clase.textContent = (j === 2) ? 'Clase de Álgebra' : 'Clase de Cálculo';
+                    celda.appendChild(clase);
+                }
+
+                dia++;
+            }
+            fila.appendChild(celda);
+        }
+        calendario.appendChild(fila);
+
+        if (dia > diasEnMes) break;
+    }
+}
+

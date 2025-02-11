@@ -41,9 +41,10 @@
                 <li><a href="#about">Quiénes Somos</a></li>
                 <li><a href="#services">Servicios</a></li>
                 <li><a href="#precios">Precios</a></li>
+                <li><a href="#cronograma">Horarios</a></li> 
                 <li><a href="#faq">Preguntas Frecuentes</a></li>
                 <li><a href="#join">Forma Parte</a></li>
-            </ul>
+            </ul>   
         </nav>
     </header>
 
@@ -317,6 +318,59 @@
     </section>
 
 
+    <section id="cronograma">
+        <h1>📅 Cronograma</h1>
+        <p>Revisá el cronograma mensual de cada materia y encontrá fácilmente las clases disponibles.</p>
+        <button id="abrir-cronograma" class="btn-abrir">Mirá el Cronograma del Mes 📆</button>
+    </section>
+    
+    <!-- Modal del Cronograma -->
+    <div id="modal-cronograma" class="modal hidden">
+        <div class="modal-content">
+            <span class="cerrar-modal" id="cerrar-modal">❌</span>
+            <span class="volver-btn hidden" id="volver-inicio">🔙 Volver</span>
+    
+            <section id="carrusel-materias" class="active">
+                <h2>📚 Elegí la Materia</h2>
+                <div class="carrusel-wrapper">
+                    <button class="carrusel-btn" id="prev-materia">◀</button>
+                    <div class="carrusel" id="materias-carrusel"></div>
+                    <button class="carrusel-btn" id="next-materia">▶</button>
+                </div>
+            </section>
+    
+            <section id="profesores" class="hidden">
+                <h2>👩‍🏫 Elegí el Profesor</h2>
+                <div class="profesores-container" id="profesores-lista"></div>
+            </section>
+    
+            <section id="cronograma-detalle" class="hidden">
+                <h2>📅 Cronograma de <span id="profesor-seleccionado"></span></h2>
+                <div class="mes-navegacion">
+                    <button id="mes-anterior">◀ Mes Anterior</button>
+                    <span id="mes-actual"></span>
+                    <button id="mes-siguiente">Mes Siguiente ▶</button>
+                </div>
+                <table id="calendario">
+                    <thead>
+                        <tr>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                            <th>Domingo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendario-body"></tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    
+    
+
 
     <section id="join">
         <div class="container">
@@ -358,6 +412,7 @@
                     <li><a href="#hero">Inicio</a></li>
                     <li><a href="#services">Servicios</a></li>
                     <li><a href="#precios">Precios</a></li>
+                    <li><a href="#cronograma">Horarios</a></li> 
                     <li><a href="#join">Forma Parte</a></li>
                     <li><a href="#faq">Preguntas Frecuentes</a></li>
                 </ul>
